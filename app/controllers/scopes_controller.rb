@@ -28,6 +28,7 @@ class ScopesController < ApplicationController
       else
         format.json { render json: @scope.errors.full_messages, status: 400 }
       end
+    end
   end
 
   private
