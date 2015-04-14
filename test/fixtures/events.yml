@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  data: MyText
+  scope_id: 1
+  scope_id: 1
+
+two:
+  data: MyText
+  scope_id: 1
+  scope_id: 1
