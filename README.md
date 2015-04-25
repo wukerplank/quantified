@@ -8,9 +8,13 @@ This project is at a very early stage and might change considerably! This README
 
 ### Installation
 
+Set a DEVISE_SECRET_KEY env variable. This project uses [figaro](https://github.com/laserlemon/figaro). See the `config/application.yml.example` file.
+
 Right now this is a very basic Ruby on Rails app that should be easy enough to deploy.
 
 ### Endpoints
+
+#### Authentication
 
 #### Scope
 
