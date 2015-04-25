@@ -28,17 +28,21 @@ Scopes are like categories and can be used to group events & measurements. Right
 
 ##### Methods
 
- - **`GET`** `/scopes.json`
+- **`GET`** `/scopes.json`
 
-   Returns a list of Scopes.
+  Returns a list of Scopes.
 
- - **`POST`** `/scopes.json`
+- **`POST`** `/scopes.json`
 
-   Creates a new Scope.
+  Creates a new Scope.
 
- - **`PATCH/PUT`** `/scopes/:id.json`
+- **`PATCH/PUT`** `/scopes/:id.json`
 
-   Updates an existing Scope.
+  Updates an existing Scope.
+
+- **`DELETE`** `/scopes/:id.json`
+
+  Deletes an existing Scope and **all** of its attached EventTypes, Events, StateTypes and States.
 
 #### EventType
 
@@ -54,6 +58,7 @@ This is only a stub so far, it will evolve into something more concrete and vali
 - **`GET`** `/event_types.json`
 - **`POST`** `/event_types.json`
 - **`PATCH/PUT`** `/event_types/:id.json`
+- **`DELETE`** `/event_types/:id.json`
 
 #### Event
 
@@ -67,9 +72,10 @@ This defines a discrete event at a specific point in time.
 
 ##### Methods
 
-- **`GET`** `/event_types/:event_type_id/events.json`
-- **`POST`** `/event_types/:event_type_id/events.json`
-- **`PATCH/PUT`** `/event_types/:event_type_id/events/:id.json`
+- **`GET`** `/events.json`
+- **`POST`** `/events.json`
+- **`PATCH/PUT`** `/events/:id.json`
+- **`DELETE`** `/events/:id.json`
 
 #### StateType
 
