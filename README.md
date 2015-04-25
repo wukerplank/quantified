@@ -67,31 +67,32 @@ This defines a discrete event at a specific point in time.
 - **`POST`** `/event_types/:event_type_id/events.json`
 - **`PATCH/PUT`** `/event_types/:event_type_id/events/:id.json`
 
-#### MeasurementType
+#### StateType
 
 This does not exist right now.
 
-Analogous to EventTypes this defines types of Measurements and their attributes. This includes amount and unit of measure.
+Analogous to EventTypes this defines types of States and their attributes. This includes amount and unit of measure.
 
-#### Measurement
+#### State
 
 This does not exist right now.
 
-Analogous to Events this represents one concrete measurement of something in time (CO<sub>2</sub> in the bed room, temperatures, etc.).
+Analogous to Events this represents one concrete state of something in time (CO<sub>2</sub> in the bed room, temperatures, etc.).
 
 ### To-Do & Food for Thought
 
  - [ ] Authorization
  - [ ] Deploy to Heroku
- - [ ] Measurements
+ - [ ] States
  - [ ] Flesh out EventTypes, so they can be used to validate submitted Events
  - [ ] EventTypes might not be bound to a scope an probably could be reused?
- - [ ] Events, Measurements: Use `created_at` as the point in time or introduce another field?
+ - [ ] Events, States: Use `created_at` as the point in time or introduce another field?
  - [ ] Maybe it's not necessary to have events as a sub-route of
  - [ ] Destroy methods
  - [ ] What about things that can't be measured continuously, like mood, pain, etc.
  - [ ] What kind of units do we allow? Should we automatically store & convert on the fly different units (metric vs imperial)?
- - [ ] Events are defined by EventTypes and might include: photo, amount, measure,
+ - [ ] Events are defined by EventTypes and might include: photo, amount, measure
+ - [ ] Publish Events & State changes via Redis pub/sub
  - [ ] After the vision for the API gets clearer: Tests!
 
 ### License & Copyright

@@ -4,6 +4,7 @@ class CreateEvents < ActiveRecord::Migration
       t.text :data, null: false
       t.integer :scope_id, null: false, index: true
       t.integer :event_type_id, null: false, index: true
+      t.integer :user_id, null: false, index: true
 
       t.timestamps null: false
     end

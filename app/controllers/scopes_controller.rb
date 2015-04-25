@@ -1,10 +1,11 @@
 class ScopesController < ApplicationController
 
+  respond_to :json
+
   def index
     @scopes = Scope.all
-    respond_to do |format|
-      format.json { render json: @scopes }
-    end
+
+    respond_with @scopes
   end
 
   def create
@@ -12,9 +13,9 @@ class ScopesController < ApplicationController
 
     respond_to do |format|
       if @scope.save
-        format.json { render json: @scope, status: 200 }
+        respond_with @scope
       else
-        format.json { render json: @scope.errors.full_messages, status: 400 }
+        respond_with @scope.errors.full_messages, status: 400
       end
     end
   end
@@ -24,9 +25,9 @@ class ScopesController < ApplicationController
 
     respond_to do |format|
       if @scope.update_attributes(scope_params)
-        format.json { render json: @scope, status: 200 }
+        respond_with @scope, status: 200
       else
-        format.json { render json: @scope.errors.full_messages, status: 400 }
+        respond_with @scope.errors.full_messages, status: 400
       end
     end
   end
