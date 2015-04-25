@@ -1,14 +1,14 @@
 class EventTypesController < ApplicationController
 
   def index
-    @event_types = EventType.all
+    @event_types = current_user.event_types.all
     respond_to do |format|
       format.json { render json: @event_types }
     end
   end
 
   def create
-    @event_type = EventType.new(event_type_params)
+    @event_type = current_user.event_types.build(event_type_params)
 
     respond_to do |format|
       if @event_type.save
@@ -20,7 +20,7 @@ class EventTypesController < ApplicationController
   end
 
   def update
-    @event_type = EventType.find(params[:id])
+    @event_type = current_user.event_types.find(params[:id])
     respond_to do |format|
       if @event_type.update_attributes(event_type_params)
         format.json { render json: @event_type, status: 200 }

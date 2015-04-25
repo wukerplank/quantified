@@ -1,10 +1,9 @@
 class EventsController < ApplicationController
 
   before_filter :convert_data, only: [:create, :update]
-  before_filter :find_event_type
 
   def index
-    @events = @event_type.events.all
+    @events = current_user.events.all
 
     respond_to do |format|
       format.json { render json: @events }
@@ -12,7 +11,7 @@ class EventsController < ApplicationController
   end
 
   def create
-    @event = @event_type.events.build(event_params)
+    @event = current_user.events.build(event_params)
 
     respond_to do |format|
       if @event.save
@@ -24,7 +23,7 @@ class EventsController < ApplicationController
   end
 
   def update
-    @event = @event_type.events.find(params[:id])
+    @event = current_user.events.find(params[:id])
 
     respond_to do |format|
       if @event.update_attributes(event_params)
@@ -39,10 +38,6 @@ class EventsController < ApplicationController
 
   def event_params
     params.require(:event).permit(:event_type_id, { data: [:quantity, :measure] })
-  end
-
-  def find_event_type
-    @event_type = EventType.find(params[:event_type_id])
   end
 
   def convert_data

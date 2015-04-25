@@ -2,11 +2,11 @@ class Event < ActiveRecord::Base
 
   serialize :data, Array
 
+  belongs_to :user
   belongs_to :scope
   belongs_to :event_type
 
-  validates_presence_of :scope_id
-  validates_presence_of :event_type_id
+  validates_presence_of :user_id, :scope_id, :event_type_id
 
   before_validation :set_scope_id
 

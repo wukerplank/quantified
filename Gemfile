@@ -17,6 +17,12 @@ gem 'devise', '~> 3.4.1'
 gem 'figaro', '~> 1.1.0'
 gem 'responders', '~> 2.0'
 
+group :development, :test do
+  gem 'minitest'
+  gem 'minitest-focus'
+  gem 'minitest-reporters'
+end
+
 # To use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

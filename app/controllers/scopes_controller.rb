@@ -3,33 +3,27 @@ class ScopesController < ApplicationController
   respond_to :json
 
   def index
-    @scopes = Scope.all
+    @scopes = current_user.scopes.all
 
     respond_with @scopes
   end
 
   def create
-    @scope = Scope.new(scope_params)
-
-    respond_to do |format|
-      if @scope.save
-        respond_with @scope
-      else
-        respond_with @scope.errors.full_messages, status: 400
-      end
-    end
+    @scope = current_user.scopes.build(scope_params)
+    @scope.save
+    respond_with @scope
   end
 
   def update
-    @scope = Scope.find(params[:id])
+    @scope = current_user.scopes.find(params[:id])
+    @scope.update_attributes(scope_params)
+    respond_with @scope
+  end
 
-    respond_to do |format|
-      if @scope.update_attributes(scope_params)
-        respond_with @scope, status: 200
-      else
-        respond_with @scope.errors.full_messages, status: 400
-      end
-    end
+  def destroy
+    @scope = current_user.scopes.find(params[:id])
+    @scope.destroy
+    head :no_content
   end
 
   private

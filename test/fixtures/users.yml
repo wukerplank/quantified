@@ -1,0 +1,3 @@
+default:
+  email: default@quantify.local
+  encrypted_password: <%= BCrypt::Password.create 'password' %>

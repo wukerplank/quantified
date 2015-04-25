@@ -83,6 +83,16 @@ This does not exist right now.
 
 Analogous to Events this represents one concrete state of something in time (CO<sub>2</sub> in the bed room, temperatures, etc.).
 
+### cURL Examples
+
+#### Create a new scope
+
+    curl -u test@test.com:test1234 -H "Content-Type: application/json" -d '{"scope": {"name": "Scope name"}}' http://localhost:3000/scopes.json
+
+#### Update an existing scope
+
+    curl -u test@test.com:test1234 -H "Content-Type: application/json" -X PUT -d '{"scope": {"name": "New scope name"}}' http://localhost:3000/scopes/1.json
+
 ### To-Do & Food for Thought
 
  - [ ] Authorization
