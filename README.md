@@ -16,6 +16,25 @@ Right now this is a very basic Ruby on Rails app that should be easy enough to d
 
 #### Authentication
 
+While it is possible to authenticate the users with HTTP basic auth, it is recommended to generate an access token for every app that uses the API.
+
+You can generate a new access token with **`POST`** to `/access_tokens.json`:
+
+    curl -u test@test.com:test1234 -H "Content-Type: application/json" -X POST -d '' http://localhost:3000/access_tokens.json
+
+This will return a response like this:
+
+    {
+      "id":1,
+      "token":"XYZ"
+    }
+
+All subsequent requests can be authenticated with an `Access-Token` field in the header:
+
+    curl -H "Content-Type: application/json; Access-Token: XYZ" http://localhost:3000/scopes.json
+
+To invalidate a token, you can simply delete it with **`DELETE`** `/access_tokens/XYZ.json`
+
 #### Scope
 
 Scopes are like categories and can be used to group events & measurements. Right now I use Scopes like "Body" (measurements, workouts, etc.), "Household" (finances, temperatures, gas price, etc.) and "Nutrition" (cups of coffee, )
@@ -101,7 +120,7 @@ Analogous to Events this represents one concrete state of something in time (CO<
 
 ### To-Do & Food for Thought
 
- - [ ] Authorization
+ - [x] Authorization
  - [ ] Deploy to Heroku
  - [ ] States
  - [ ] Flesh out EventTypes, so they can be used to validate submitted Events

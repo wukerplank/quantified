@@ -13,7 +13,7 @@ gem 'rails', '4.2.1'
 gem 'rails-api'
 gem 'spring', :group => :development
 
-gem 'devise', '~> 3.4.1'
+gem 'devise'
 gem 'figaro', '~> 1.1.0'
 gem 'responders', '~> 2.0'
 

@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
 
-  devise_for :users, skip: :sessions
+  # Authentication ============================================================
+  devise_for :users
+  resources :access_tokens
+
+  # Resources =================================================================
 
   resources :scopes, except: [:new, :edit]
 

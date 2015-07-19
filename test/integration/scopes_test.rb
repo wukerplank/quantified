@@ -7,7 +7,7 @@ class ScopesTest < ActionDispatch::IntegrationTest
   end
 
   test "retrieves all scopes" do
-    get scopes_path(format: :json), nil, json_request_headers(@user.email, 'password')
+    get scopes_path(format: :json), nil, json_request_headers_basic_auth(@user.email, 'password')
     assert_response 200
   end
 
@@ -18,7 +18,7 @@ class ScopesTest < ActionDispatch::IntegrationTest
 
     scope_count = Scope.count
 
-    post scopes_path(format: :json), scope_json, json_request_headers(@user.email, 'password')
+    post scopes_path(format: :json), scope_json, json_request_headers_basic_auth(@user.email, 'password')
     assert_response 201
     assert_equal scope_count + 1, Scope.count
   end
@@ -30,7 +30,7 @@ class ScopesTest < ActionDispatch::IntegrationTest
 
     scope_count = Scope.count
 
-    post scopes_path(format: :json), scope_json, json_request_headers(@user.email, 'password')
+    post scopes_path(format: :json), scope_json, json_request_headers_basic_auth(@user.email, 'password')
     assert_response 422
     assert_equal scope_count, Scope.count
   end
@@ -43,7 +43,7 @@ class ScopesTest < ActionDispatch::IntegrationTest
       scope: { name: new_name }
     }.to_json
 
-    put scope_path(scope, format: :json), updated_scope_json, json_request_headers(@user.email, 'password')
+    put scope_path(scope, format: :json), updated_scope_json, json_request_headers_basic_auth(@user.email, 'password')
     assert_response 204
 
     scope.reload
@@ -57,18 +57,18 @@ class ScopesTest < ActionDispatch::IntegrationTest
       scope: { name: '' }
     }.to_json
 
-    put scope_path(scope, format: :json), updated_scope_json, json_request_headers(@user.email, 'password')
+    put scope_path(scope, format: :json), updated_scope_json, json_request_headers_basic_auth(@user.email, 'password')
     assert_response 422
   end
 
-  test "delets a scope" do
+  test "deletes a scope" do
     scope = scopes(:test_scope)
 
     scope_count = Scope.count
 
-    delete scope_path(scope, format: :json), nil, json_request_headers(@user.email, 'password')
+    delete scope_path(scope, format: :json), nil, json_request_headers_basic_auth(@user.email, 'password')
     assert_response 204
-    assert_equal scope_count - 1, Scope.count
+    assert_equal scope_count -1, Scope.count
   end
 
 end

@@ -17,15 +17,33 @@ class ActiveSupport::TestCase
   # Add more helper methods to be used by all tests here...
 end
 
-def json_request_headers(email=nil, password=nil)
-  headers = {
+def default_json_headers
+  {
     "Accept" => "application/json",
     "Content-Type" => "application/json",
-
   }
-  if email && password
-    headers["HTTP_AUTHORIZATION"] = "Basic " + Base64.encode64("#{email}:#{password}")
-  end
+end
 
-  return headers
+def json_request_headers_basic_auth(email=nil, password=nil)
+  default_json_headers.merge({
+    "HTTP_AUTHORIZATION" => "Basic " + Base64.encode64("#{email}:#{password}")
+  })
+end
+
+def json_request_headers_token_auth(token=nil)
+  default_json_headers.merge({
+    "Access-Token" => token
+  })
+end
+
+def generate_new_access_token(email=nil, password=nil)
+  token = post access_tokens_path(format: :json), nil, json_request_headers_basic_auth(email, password)
+  assert_response 201
+
+  raw_token = JSON.parse(response.body)
+
+  get scopes_path, nil, json_request_headers_token_auth(raw_token['token'])
+  assert_response 200
+
+  return AccessToken.find(raw_token['id'])
 end
